@@ -1,46 +1,21 @@
-# def test01():
-#     a,b=input().split()
-#     print(a,b)
-#     a=input().split()		# 这里数组存储的内容都是字符串
-#     print(a)                # ['1', '2', '3']
-#     b=list(map(int,input().split()))	# 这里数组存储的内容是数字
-#     print(b,type(b[0]))     # [1, 2, 3]
+import sys
+input=lambda:sys.stdin.readline().strip()
 
-# # test01()
+n,m=map(int,input().split())
 
-# def test02():
-#     a,b,c=map(int,input())	# 相当于 a,b=int(input()),int(input())
-#     print(a,b,c,type(a))
+_v,_w=[0],[0]   # 体积、价格
+dp=[[0]*(m+1) for i in range(n+1)]
 
-#     s = list(input())
-#     print(s,type(s[0]))
+for i in range(n):
+    a,b=map(int,input().split())
+    _v.append(a)
+    _w.append(b)
+# for i in range(n):print(_v[i],_w[i])
 
-#     a=list(map(int,input()))
-#     print(a,type(a[0]))
-
-#     # 使用strip可以移除掉可能存在的空格或者换行，更加安全
-#     s = list(input().strip())
-#     print(s,type(s[0]))
-
-#     s = list(map(int,input().strip()))
-#     print(s,type(s[0]))
-
-# # test02()
-
-from collections import deque
-n=int(input())
-s=list(input())
-q=deque()
-
-while True:
-  # if n%2==1:print('No');break   # 只有长度为偶数的括号串才能配对
-  a=s.pop()
-  # print(a,' ',s)
-  if a==')':q.appendleft(a)
-  else:
-    if q:                                                                          
-      b=q.popleft()
-      if b=='(':continue    # 配对成功，继续循环
-    else: print('No');break
-    
-  if len(s)==0 and len(q)==0 :print('Yes');break   # 括号串全部出列时，结束循环
+for i in range(1,n+1):
+    for j in range(1,m+1):
+        if _v[i]>j:
+            dp[i][j]=dp[i-1][j]
+        else:
+            dp[i][j]=max(dp[i-1][j],dp[i-1][j-_v[i]]+_w[i])
+print(dp[n][m])
