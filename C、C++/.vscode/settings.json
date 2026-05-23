@@ -1,0 +1,11 @@
+{
+    "C_Cpp.errorSquiggles": "enabled",
+    "files.associations": {
+        "*.dbclient-js": "javascript",
+        "iostream": "cpp",
+        "ostream": "cpp",
+        "算法比赛模板": "cpp",
+        "stdlib.h": "c",
+        "stdio.h": "c"
+    }
+}
