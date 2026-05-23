@@ -1,1 +1,0 @@
-{"name":"Local: P1803线段覆盖","url":"d:\\Files\\codingFiles\\VScodeFiles\\Python\\Test\\P1803线段覆盖.py","tests":[{"id":1774361830859,"input":"3\n0 2\n2 4\n1 3","output":"2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Files\\codingFiles\\VScodeFiles\\Python\\Test\\P1803线段覆盖.py","group":"local","local":true}
