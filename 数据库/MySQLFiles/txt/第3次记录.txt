@@ -1,0 +1,29 @@
+use mysql;
+select * from user;  # 这条命令用来查看所有的用户
+
+-- 用户控制
+-- 创建用户 itcast ,只能够在当前主机localhost访问，访问密码为123456
+create user 'itcast'@'localhost' identified by '123456';
+
+-- 创建用户heima，可以再任意主机访问数据库，密码123456
+create user 'tyh'@'%' identified by '081704';
+
+-- 修改用户密码
+alter user 'itcast'@'localhost' identified with mysql_native_password by '081704';
+
+-- 删除用户
+drop user 'itcast'@'localhost';
+
+
+-- 权限控制
+-- 查询权限
+show grants for 'tyh'@'%';
+
+-- 授予权限
+grant all on test.* to 'tyh'@'%';
+    # 授予tyh test库的全部权限
+grant all on *.* to 'tyh' @ '%';
+    # 授予tyh 所有库的所有权限
+
+-- 撤销权限
+revoke all on test.* from 'tyh'@'%';
