@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>皮影戏文化平台</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+    background: linear-gradient(135deg, #f6f1ea 0%, #ebe5dd 100%);
+    min-height: 100vh;
+    padding-bottom: 70px;
+    color: #333;
+}
+
+/* ===== 顶部 ===== */
+header {
+    background: linear-gradient(135deg, #7b1e1e 0%, #a93226 100%);
+    color: white;
+    text-align: center;
+    padding: 20px 15px;
+    box-shadow: 0 4px 12px rgba(123, 30, 30, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+header h1 {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* ===== 页面 ===== */
+.page {
+    display: none;
+    padding: 25px 20px;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.page h2 {
+    font-size: 24px;
+    color: #7b1e1e;
+    margin-bottom: 20px;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+.page h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, #7b1e1e, #a93226);
+    border-radius: 2px;
+}
+
+/* ===== 剧场 ===== */
+.video-box {
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.theater-clock {
+    font-size: 32px;
+    color: #7b1e1e;
+    font-weight: 700;
+    margin-bottom: 15px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #f6f1ea, #ebe5dd);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.video-box iframe {
+    width: 100%;
+    max-width: 800px;
+    height: 450px;
+    border-radius: 8px;
+    border: none;
+}
+
+/* ===== 商城 ===== */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.product {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-img {
+    width: 100%;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    background-color: #f0f0f0;
+    transition: all 0.3s;
+}
+
+.product:hover .product-img {
+    transform: scale(1.05);
+}
+
+.product:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(123, 30, 30, 0.15);
+}
+
+.product h3 {
+    font-size: 16px;
+    color: #7b1e1e;
+    padding: 15px 15px 8px;
+    font-weight: 600;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    line-height: 1.4;
+}
+
+.product p {
+    padding: 0 15px;
+    font-size: 13px;
+    color: #666;
+    flex: 1;
+}
+
+.product p:first-of-type {
+    font-size: 18px;
+    color: #a93226;
+    font-weight: 700;
+    padding: 10px 15px;
+}
+
+.product button {
+    background: linear-gradient(135deg, #7b1e1e, #a93226);
+    color: white;
+    border: none;
+    padding: 12px 15px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s;
+    margin: 15px;
+    border-radius: 8px;
+}
+
+.product button:hover {
+    opacity: 0.9;
+    box-shadow: 0 4px 12px rgba(123, 30, 30, 0.3);
+}
+
+.product button:active {
+    transform: scale(0.98);
+}
+
+/* ===== 购物车 ===== */
+.cart {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    margin-top: 30px;
+}
+
+.cart h3 {
+    color: #7b1e1e;
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+#cartList table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+#cartList th {
+    background: #f5f5f5;
+    color: #7b1e1e;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+#cartList td {
+    padding: 12px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+#cartList button {
+    background: #7b1e1e;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s;
+    margin: 0 2px;
+}
+
+#cartList button:hover {
+    background: #a93226;
+    transform: scale(1.05);
+}
+
+.cart > button {
+    background: linear-gradient(135deg, #7b1e1e, #a93226);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.cart > button:hover {
+    box-shadow: 0 4px 12px rgba(123, 30, 30, 0.3);
+}
+
+/* ===== 论坛 ===== */
+.forum-input {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 25px;
+}
+
+#postName, #postText {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    transition: all 0.3s;
+    margin-bottom: 12px;
+}
+
+#postName:focus, #postText:focus {
+    outline: none;
+    border-color: #7b1e1e;
+    box-shadow: 0 0 0 3px rgba(123, 30, 30, 0.1);
+}
+
+.forum-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.forum-buttons button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+
+.forum-buttons button:first-child {
+    background: linear-gradient(135deg, #7b1e1e, #a93226);
+    color: white;
+}
+
+.forum-buttons button:first-child:hover {
+    box-shadow: 0 4px 12px rgba(123, 30, 30, 0.3);
+}
+
+.forum-buttons button:last-child {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.forum-buttons button:last-child:hover {
+    background: #e0e0e0;
+}
+
+.post {
+    background: white;
+    padding: 16px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid #7b1e1e;
+    transition: all 0.3s;
+}
+
+.post:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transform: translateX(4px);
+}
+
+.post strong {
+    color: #7b1e1e;
+    font-size: 15px;
+}
+
+.post span {
+    color: #999;
+    font-size: 12px;
+    margin-left: 8px;
+}
+
+.post p {
+    margin-top: 8px;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* ===== 登录/我的 ===== */
+.login-panel {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    max-width: 400px;
+    margin-bottom: 25px;
+}
+
+.login-panel input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.login-panel input:focus {
+    outline: none;
+    border-color: #7b1e1e;
+    box-shadow: 0 0 0 3px rgba(123, 30, 30, 0.1);
+}
+
+.login-panel > div {
+    display: flex;
+    gap: 10px;
+}
+
+.login-panel button {
+    flex: 1;
+    padding: 12px;
+    background: linear-gradient(135deg, #7b1e1e, #a93226);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.login-panel button:hover {
+    box-shadow: 0 4px 12px rgba(123, 30, 30, 0.3);
+}
+
+.login-panel p {
+    font-size: 15px;
+    color: #333;
+    margin: 12px 0;
+}
+
+.login-panel p strong {
+    color: #7b1e1e;
+}
+
+/* ===== 浏览历史 ===== */
+.history-list {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* 登录/注册 按钮样式（输入框下方的大按钮） */
+.auth-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.auth-btn-login {
+    background: linear-gradient(90deg,#7b1e1e,#a93226);
+    color: #fff;
+}
+.auth-btn-register {
+    background: linear-gradient(90deg,#ff9f43,#ff6b6b);
+    color: #fff;
+}
+.auth-btn:active { transform: translateY(1px); }
+
+/* 样例暗色登录卡片（参考用户样例） */
+.auth-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 18px 0 0 0;
+}
+.auth-card {
+    background: #ffffff;
+    color: #222;
+    width: 360px;
+    border-radius: 12px;
+    padding: 20px 18px 18px 18px;
+    box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
+    text-align: center;
+}
+.auth-card h3 {
+    margin-bottom: 8px;
+    font-size: 26px;
+    color: #111;
+}
+.auth-card .hint {
+    color: #666;
+    font-size: 13px;
+    margin-bottom: 18px;
+}
+.auth-input {
+    background: transparent;
+    border: 1px solid #e6e6e6;
+    padding: 12px 14px;
+    border-radius: 8px;
+    color: #222;
+    width: 100%;
+    margin-bottom: 12px;
+}
+.auth-input.with-toggle { padding-right: 86px; }
+.password-row { display: flex; gap: 8px; align-items: center; }
+.password-row .auth-input { flex: 1; margin-bottom: 0; }
+.toggle-pass {
+    background: #f3f4f6;
+    color: #333;
+    border: 1px solid #e6e6e6;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.toggle-pass.toggle-under { padding:6px 10px; font-size:13px; border-radius:6px; }
+.remember-row { text-align: left; margin: 8px 0 12px 4px; }
+.remember-row label { color: #444; font-size: 13px; }
+.auth-input::placeholder { color: #9e9e9e; }
+.primary-btn {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: none;
+    background: #1976d2;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+}
+.primary-btn:hover { background: #1565c0; }
+
+/* 专门用于登录的红色按钮 */
+.login-btn {
+    background: linear-gradient(90deg,#ac2624,#b71c1c);
+    color: #fff;
+}
+.login-btn:hover { filter:brightness(0.95); box-shadow:0 6px 18px rgba(229,57,53,0.16); }
+
+/* 注册按钮，位于登录上方 */
+.auth-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 18px;
+    font-size: 13px;
+    color: #666;
+    border-top: 1px solid #f3f4f6;
+    padding-top: 12px;
+}
+.auth-footer a { color: #7b1e1e; text-decoration: none; }
+.auth-footer a:hover { text-decoration: underline; }
+
+
+.history-list h3 {
+    margin: 0 0 15px 0;
+    color: #7b1e1e;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.history-item {
+    font-size: 13px;
+    color: #555;
+    padding: 10px 12px;
+    border-bottom: 1px solid #f0f0f0;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+.history-item:hover {
+    background: #f9f9f9;
+}
+
+.history-item time {
+    color: #999;
+    font-size: 11px;
+}
+
+#historyList > div:last-child {
+    margin-top: 12px;
+}
+
+#historyList button {
+    background: #f0f0f0;
+    color: #333;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+#historyList button:hover {
+    background: #e0e0e0;
+}
+
+/* ===== 底部导航 ===== */
+nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    display: flex;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #e0e0e0;
+    z-index: 99;
+}
+
+nav button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    background: none;
+    color: #999;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+nav button:hover {
+    color: #7b1e1e;
+    background: #f9f9f9;
+}
+
+nav button.active {
+    color: #7b1e1e;
+    border-top: 3px solid #7b1e1e;
+}
+
+/* ===== 支付弹窗 ===== */
+#payModal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.35);
+    align-items: center;
+    justify-content: center;
+}
+
+#payModal > div {
+    background: #fff;
+    padding: 32px 24px 24px 24px;
+    border-radius: 16px;
+    min-width: 320px;
+    max-width: 90vw;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    text-align: center;
+    position: relative;
+}
+
+#payModal .close {
+    position: absolute;
+    right: 16px;
+    top: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #888;
+}
+
+#payModal h3 {
+    color: #7b1e1e;
+    margin-bottom: 18px;
+}
+
+#payModal button {
+    flex: 1;
+    padding: 12px 0;
+    background: #1aad19;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#payModal button:hover {
+    background: #17a613;
+}
+
+#payModal #payQRWrap {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+#payModal #payQRImg {
+    width: 160px;
+    height: 160px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #eee;
+}
+
+#payModal #payQRWrap div {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 10px;
+}
+</style>
+
+<script>
+/**
+ * 显示指定ID的页面，并隐藏其他页面
+ * @param {string} id - 要显示的页面ID
+ */
+function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    // 更新导航按钮高亮
+    document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+    // 记录浏览历史（保留兼容旧调用）
+    recordHistory(id);
+    renderHistory();
+}
+
+/**
+ * 更可靠的页面切换函数：支持传入触发按钮
+ * @param {string} id 页面ID
+ * @param {Element} btn 触发按钮（可选）
+ */
+function showPage(id, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const target = document.getElementById(id);
+    if (target) target.classList.add('active');
+    // 更新导航按钮高亮
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    if (btn && (btn instanceof Element)) {
+        btn.classList.add('active');
+    } else {
+        const navBtn = document.querySelector(`nav button[data-target="${id}"]`);
+        if (navBtn) navBtn.classList.add('active');
+    }
+    // 记录浏览历史
+    recordHistory(id);
+    renderHistory();
+}
+
+// 产品数据（可扩展）
+const PRODUCTS = [
+    { id: 1, name: '皮影人物挂饰', price: 39, desc: '精美手工，适合挂饰和钥匙扣', img: 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%237b1e1e%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2224%22 fill=%22%23fff%22 text-anchor=%22middle%22 dy=%22.3em%22%3E皮影挂饰%3C/text%3E%3C/svg%3E' },
+    { id: 2, name: '皮影艺术台灯', price: 129, desc: '暖光设计，营造典雅氛围', img: 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%23d4a574%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2224%22 fill=%22%23fff%22 text-anchor=%22middle%22 dy=%22.3em%22%3E台灯%3C/text%3E%3C/svg%3E' },
+    { id: 3, name: '皮影主题明信片套装', price: 25, desc: '6张典藏明信片', img: 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%23a93226%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2224%22 fill=%22%23fff%22 text-anchor=%22middle%22 dy=%22.3em%22%3E明信片%3C/text%3E%3C/svg%3E' }
+];
+
+const CART_KEY = 'shadow_cart';
+const POSTS_KEY = 'shadow_posts';
+const USER_KEY = 'shadow_user';
+const USERS_KEY = 'shadow_users';
+const REMEMBER_KEY = 'shadow_remember';
+const HISTORY_KEY = 'shadow_history';
+let cart = [];
+let posts = [];
+let currentUser = null;
+let users = [];
+let historyMap = {}; // keyed by username -> array of {page,time}
+
+/**
+ * 格式化金额，保留两位小数
+ * @param {number} n - 需要格式化的数字
+ * @returns {string} 格式化后的金额字符串
+ */
+function formatMoney(n) { return Number(n).toFixed(2); }
+
+/**
+ * 初始化应用，加载各类数据并渲染界面
+ */
+function init() {
+    renderProducts();
+    loadCart();
+    renderCart();
+    loadPosts();
+    renderPosts();
+    loadUsers();
+    ensureAdminAccount();
+    loadUser();
+    renderMeContent();
+    loadRemembered();
+    loadHistory();
+    renderHistory();
+    updateClock();
+    setInterval(updateClock, 1000);
+}
+
+// 渲染商品列表
+/**
+ * 渲染商品列表到页面
+ */
+function renderProducts() {
+    const container = document.getElementById('products');
+    container.innerHTML = PRODUCTS.map(p => `
+        <div class="product">
+            <div class="product-img" style="background-image:url('${p.img}')"></div>
+            <h3>${escapeHtml(p.name)}</h3>
+            <p>¥${formatMoney(p.price)}</p>
+            <p style="font-size:12px;color:#666;">${escapeHtml(p.desc)}</p>
+            <button onclick="addToCart(${p.id})">加入购物车</button>
+        </div>
+    `).join('');
+}
+
+// 购物车逻辑
+/**
+ * 将指定ID的商品添加到购物车
+ * @param {number} id - 商品ID
+ */
+function addToCart(id) {
+    const prod = PRODUCTS.find(p => p.id === id);
+    if (!prod) return;
+    if (!requireLogin()) return;
+    const item = cart.find(c => c.id === id);
+    if (item) item.qty += 1; else cart.push({ id: id, name: prod.name, price: prod.price, qty: 1 });
+    saveCart();
+    renderCart();
+}
+
+/**
+ * 渲染购物车内容到页面
+ */
+function renderCart() {
+    const el = document.getElementById('cartList');
+    if (!cart || cart.length === 0) {
+        el.innerText = '购物车为空';
+        document.getElementById('total').innerText = '0.00';
+        return;
+    }
+    let html = '<table style="width:100%;border-collapse:collapse;">';
+    html += '<tr><th>商品</th><th>单价</th><th>数量</th><th>小计</th><th>操作</th></tr>';
+    let total = 0;
+    cart.forEach(i => {
+        const subtotal = i.price * i.qty;
+        total += subtotal;
+        html += `<tr><td>${escapeHtml(i.name)}</td><td>¥${formatMoney(i.price)}</td><td><button onclick="changeQty(${i.id}, -1)">-</button> ${i.qty} <button onclick="changeQty(${i.id}, 1)">+</button></td><td>¥${formatMoney(subtotal)}</td><td><button onclick="removeFromCart(${i.id})">删除</button></td></tr>`;
+    });
+    html += '</table>';
+    el.innerHTML = html;
+    document.getElementById('total').innerText = formatMoney(total);
+}
+
+/**
+ * 修改购物车中指定商品的数量
+ * @param {number} id - 商品ID
+ * @param {number} delta - 数量变化值（正数增加，负数减少）
+ */
+function changeQty(id, delta) {
+    const item = cart.find(c => c.id === id);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) cart = cart.filter(c => c.id !== id);
+    saveCart();
+    renderCart();
+}
+
+/**
+ * 从购物车中移除指定商品
+ * @param {number} id - 商品ID
+ */
+function removeFromCart(id) {
+    cart = cart.filter(c => c.id !== id);
+    saveCart();
+    renderCart();
+}
+
+/**
+ * 清空购物车
+ */
+function clearCart() {
+    if (confirm('确认清空购物车？')) {
+        cart = [];
+        saveCart();
+        renderCart();
+    }
+}
+
+/**
+ * 将购物车数据保存到本地存储
+ */
+function saveCart() { localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+
+/**
+ * 从本地存储加载购物车数据
+ */
+function loadCart() { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+
+// 论坛逻辑（本地持久化）
+/**
+ * 发布新帖子
+ */
+function postMessage() {
+    if (!requireLogin()) return;
+    const name = document.getElementById('postName').value.trim() || (currentUser ? currentUser.name : '匿名用户');
+    const text = document.getElementById('postText').value.trim();
+    if (!text) { alert('请输入内容后再发帖'); return; }
+    const item = { name, text, time: new Date().toISOString() };
+    posts.unshift(item);
+    savePosts();
+    renderPosts();
+    document.getElementById('postText').value = '';
+}
+
+/**
+ * 渲染论坛帖子列表
+ */
+function renderPosts() {
+    const el = document.getElementById('posts');
+    if (!posts || posts.length === 0) { el.innerHTML = '<div class="post">暂无帖子</div>'; return; }
+    el.innerHTML = posts.map(p => `
+        <div class="post">
+            <strong>${escapeHtml(p.name)}</strong>
+            <span style="color:#999;font-size:12px;margin-left:8px;">${new Date(p.time).toLocaleString()}</span>
+            <p>${escapeHtml(p.text)}</p>
+        </div>
+    `).join('');
+}
+
+/**
+ * 将帖子数据保存到本地存储
+ */
+function savePosts() { localStorage.setItem(POSTS_KEY, JSON.stringify(posts)); }
+
+/**
+ * 从本地存储加载帖子数据
+ */
+function loadPosts() { posts = JSON.parse(localStorage.getItem(POSTS_KEY)) || []; }
+
+/**
+ * 清空所有帖子
+ */
+function clearPosts() { if (confirm('确认清空所有帖子？')) { posts = []; savePosts(); renderPosts(); } }
+
+// ========== 用户与历史记录 ===========
+/**
+ * 将当前用户信息保存到本地存储
+ */
+function saveUser() { localStorage.setItem(USER_KEY, JSON.stringify(currentUser)); }
+
+/**
+ * 从本地存储加载当前用户信息
+ */
+function loadUser() { currentUser = JSON.parse(localStorage.getItem(USER_KEY)) || null; }
+
+/**
+ * 将用户列表保存到本地存储
+ */
+function saveUsers() { localStorage.setItem(USERS_KEY, JSON.stringify(users)); }
+
+/**
+ * 从本地存储加载用户列表
+ */
+function loadUsers() { users = JSON.parse(localStorage.getItem(USERS_KEY)) || []; }
+
+/**
+ * 确保系统中有管理员账户
+ */
+function ensureAdminAccount() {
+    // 保留一个固定 admin 账号，密码为 0817（仅用于演示）。如果不存在则创建。
+    const admin = users.find(u => u.name === 'admin');
+    if (!admin) {
+        users.push({ name: 'admin', pwd: '0817', created: new Date().toISOString(), role: 'admin' });
+        saveUsers();
+    }
+}
+
+/**
+ * 更新剧场时钟显示
+ */
+function updateClock() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const el = document.getElementById('theaterClock');
+    if (el) el.textContent = `${hours}:${minutes}:${seconds}`;
+}
+
+/**
+ * 将浏览历史保存到本地存储
+ */
+function saveHistory() { localStorage.setItem(HISTORY_KEY, JSON.stringify(historyMap)); }
+
+/**
+ * 从本地存储加载浏览历史
+ */
+function loadHistory() { historyMap = JSON.parse(localStorage.getItem(HISTORY_KEY)) || {}; }
+
+/**
+ * 记录页面浏览历史
+ * @param {string} pageId - 页面ID
+ */
+function recordHistory(pageId) {
+    // 仅在用户已登录时记录该用户的浏览历史
+    if (!currentUser || !currentUser.logged) return;
+    const uname = currentUser.name;
+    const now = new Date().toISOString();
+    if (!historyMap[uname]) historyMap[uname] = [];
+    const arr = historyMap[uname];
+    // 简单去重：如果最近一条相同则不重复记录
+    if (arr.length > 0 && arr[0].page === pageId) return;
+    arr.unshift({ page: pageId, time: now });
+    if (arr.length > 50) arr.pop();
+    historyMap[uname] = arr;
+    saveHistory();
+}
+
+/**
+ * 渲染浏览历史到页面
+ */
+function renderHistory() {
+    const el = document.getElementById('historyList');
+    if (!el) return;
+    const pageNames = { theater: '皮影剧场', shop: '文创商场', forum: '交流论坛', me: '我的' };
+    // 仅当已登录时显示浏览记录（按用户）
+    if (!currentUser || !currentUser.logged) {
+        el.innerHTML = '<h3>浏览记录</h3><div class="history-item">请先登录后查看浏览记录</div>';
+        return;
+    }
+    const arr = historyMap[currentUser.name] || [];
+    if (!arr || arr.length === 0) { el.innerHTML = '<h3>浏览记录</h3><div class="history-item">暂无记录</div>'; return; }
+    const items = arr.map(h => `<div class="history-item"><span>${escapeHtml(pageNames[h.page] || h.page)}</span> <time>${new Date(h.time).toLocaleString()}</time></div>`).join('');
+    el.innerHTML = '<h3>浏览记录</h3>' + items + '<div style="margin-top:8px;"><button onclick="clearHistory()">清空记录</button></div>';
+}
+
+/**
+ * 清空浏览历史
+ */
+function clearHistory() { if (!currentUser || !currentUser.logged) return; if (confirm('确认清空浏览记录？')) { historyMap[currentUser.name] = []; saveHistory(); renderHistory(); } }
+
+/**
+ * 检查用户是否已登录，未登录则提示跳转到登录页
+ * @returns {boolean} 是否已登录
+ */
+function requireLogin() {
+    if (currentUser && currentUser.logged) {
+        if (currentUser.mustChangePassword) {
+            // 强制修改密码
+            showForceChangeModal();
+            showPage('me');
+            return false;
+        }
+        return true;
+    }
+    if (confirm('需要登录才能继续，是否前往登录页？')) {
+        showPage('me');
+    }
+    return false;
+}
+
+/**
+ * 渲染"我的"页面内容（根据登录状态显示不同内容）
+ */
+function renderMeContent() {
+    const container = document.getElementById('meContent');
+    if (!container) return;
+    if (currentUser && currentUser.logged) {
+        container.innerHTML = `<div class="login-panel"><p><strong>用户名：</strong>${escapeHtml(currentUser.name)}</p><p>登录状态：已登录</p><p><button onclick="logout()">退出登录</button></p></div>`;
+    } else {
+                // 按用户样例展示暗色卡片样式的登录界面，底部包含"找回密码 / 注册账号 / 意见反馈"链接
+                container.innerHTML = `
+                        <div class="auth-wrap">
+                            <div class="auth-card">
+                                <h3>密码登录</h3>
+                                <div class="hint" color=#333333>《古镇炊烟绕屋檐，江湖恩怨起波澜》</div>
+                                <input id="loginName" class="auth-input" placeholder="请使用手机号码登录">
+                                <div style="margin-top:8px;">
+                                    <input id="loginPwd" class="auth-input" type="password" placeholder="请输入密码（初始密码为123456）">
+                                    <div style="display:flex;justify-content:flex-end;margin-top:6px;">
+                                        <button type="button" class="toggle-pass toggle-under" onclick="togglePwd('loginPwd', this)">显示密码</button>
+                                    </div>
+                                </div>
+                                <div class="remember-row"><label><input id="rememberMe" type="checkbox"> 记住我</label></div>
+                                    <button class="primary-btn login-btn" onclick="login()">登录</button>
+                                <div style="height:8px;"></div>
+                                <div class="auth-footer">
+                                    <a href="#" onclick="forgotPwd();return false;">找回密码</a>
+                                    <a href="#" onclick="feedback();return false;">意见反馈</a>
+                                </div>
+                            </div>
+                        </div>
+                `;
+                // 默认：显示登录卡片，隐藏注册卡片
+                setTimeout(() => showAuthTab('login'), 0);
+                // 填充记住的用户名（如有）
+                setTimeout(() => fillRemembered(), 10);
+    }
+}
+
+/**
+ * 用户登录处理
+ */
+function login() {
+    const name = document.getElementById('loginName').value.trim();
+    const pwd = document.getElementById('loginPwd').value;
+    if (!name) { alert('请输入用户名'); return; }
+    if (!pwd) { alert('请输入密码'); return; }
+    // 检查用户表，支持首次使用手机号登录（初始密码 123456），自动创建用户
+    let user = users.find(u => u.name === name);
+    if (!user) {
+        if (pwd === '123456') {
+            // 自动创建新用户，初始密码为 123456
+            user = { name: name, pwd: '123456', created: new Date().toISOString(), role: 'user' };
+            users.push(user);
+            saveUsers();
+        } else {
+            alert('账号或密码不正确');
+            return;
+        }
+    }
+    if (user.pwd !== pwd) { alert('账号或密码不正确'); return; }
+    // 登录成功
+    const mustChange = (user.pwd === '123456');
+    currentUser = { name: user.name, logged: true, role: user.role || 'user', time: new Date().toISOString(), mustChangePassword: mustChange };
+    saveUser();
+    // 处理记住我
+    try {
+        const rem = document.getElementById('rememberMe');
+        if (rem && rem.checked) localStorage.setItem(REMEMBER_KEY, name); else localStorage.removeItem(REMEMBER_KEY);
+    } catch (e) {}
+    renderMeContent();
+    alert('登录成功');
+    if (mustChange) {
+        // 立即要求修改密码
+        setTimeout(() => showForceChangeModal(), 200);
+    }
+}
+
+/**
+ * 用户退出登录
+ */
+function logout() {
+    if (!confirm('确定要退出登录？')) return;
+    currentUser = null;
+    saveUser();
+    renderMeContent();
+}
+
+// 注册功能已移除：不再在前端提供注册流程
+
+/**
+ * 忘记密码：简单本地重置（演示用途），通过 prompt 交互
+ */
+function forgotPwd() {
+    try {
+        const name = prompt('请输入要重置密码的用户名：');
+        if (!name) return;
+        const user = users.find(u => u.name === name.trim());
+        if (!user) { alert('该用户不存在或无法重置密码'); return; }
+        const np = prompt('请输入新密码（至少4位）：');
+        if (!np || np.length < 4) { alert('密码太短，至少4位'); return; }
+        const np2 = prompt('请再次输入新密码以确认：');
+        if (np !== np2) { alert('两次密码不一致'); return; }
+        user.pwd = np;
+        saveUsers();
+        alert('密码已重置，请使用新密码登录');
+    } catch (e) { alert('重置失败'); }
+}
+
+// 简单的 XSS 转义
+/**
+ * 转义HTML特殊字符，防止XSS攻击
+ * @param {string} text - 需要转义的文本
+ * @returns {string} 转义后的文本
+ */
+function escapeHtml(text) {
+    if (!text) return '';
+    return text.replace(/[&<>"']/g, function (m) {
+        return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' })[m];
+    });
+}
+
+// 记住用户名相关：保存/加载
+function loadRemembered() {
+    try {
+        const v = localStorage.getItem(REMEMBER_KEY);
+        if (v) {
+            // 如果登录面板已渲染，立即填充
+            const el = document.getElementById('loginName');
+            const rem = document.getElementById('rememberMe');
+            if (el) el.value = v;
+            if (rem) rem.checked = true;
+        }
+    } catch (e) {}
+}
+
+function fillRemembered() {
+    try {
+        const v = localStorage.getItem(REMEMBER_KEY);
+        if (!v) return;
+        const el = document.getElementById('loginName');
+        const rem = document.getElementById('rememberMe');
+        if (el) el.value = v;
+        if (rem) rem.checked = true;
+    } catch (e) {}
+}
+
+/**
+ * 切换密码输入可见性
+ * @param {string} inputId - 密码输入框ID
+ * @param {Element} btn - 触发按钮
+ */
+function togglePwd(inputId, btn) {
+    const ip = document.getElementById(inputId);
+    if (!ip) return;
+    if (ip.type === 'password') {
+        ip.type = 'text';
+        if (btn) btn.textContent = '隐藏';
+    } else {
+        ip.type = 'password';
+        if (btn) btn.textContent = '显示';
+    }
+}
+
+// 强制首次登录修改密码的相关逻辑
+function showForceChangeModal() {
+    const m = document.getElementById('forceChangeModal');
+    if (!m) return;
+    const p1 = document.getElementById('newPwd1');
+    const p2 = document.getElementById('newPwd2');
+    const msg = document.getElementById('forceMsg');
+    if (p1) p1.value = '';
+    if (p2) p2.value = '';
+    if (msg) { msg.style.display = 'none'; msg.textContent = ''; }
+    m.style.display = 'flex';
+}
+
+function submitForceChange() {
+    const p1 = document.getElementById('newPwd1');
+    const p2 = document.getElementById('newPwd2');
+    const msg = document.getElementById('forceMsg');
+    if (!p1 || !p2) return;
+    const a = p1.value || '';
+    const b = p2.value || '';
+    if (a.length < 4) { if (msg) { msg.style.display='block'; msg.textContent='密码至少4位'; } return; }
+    if (a !== b) { if (msg) { msg.style.display='block'; msg.textContent='两次密码输入不一致'; } return; }
+    if (a === '123456') { if (msg) { msg.style.display='block'; msg.textContent='新密码不能为初始密码'; } return; }
+    // 更新用户数据
+    try {
+        const u = users.find(x => x.name === (currentUser && currentUser.name));
+        if (!u) { alert('未找到用户记录'); return; }
+        u.pwd = a;
+        // 清除首次修改标志
+        if (currentUser) { currentUser.mustChangePassword = false; saveUser(); }
+        saveUsers();
+        // 关闭模态
+        const m = document.getElementById('forceChangeModal'); if (m) m.style.display='none';
+        alert('密码修改成功，请使用新密码继续登录。');
+        // 强制登出当前会话以确保后续使用新密码登录
+        currentUser = null; saveUser(); renderMeContent();
+        showPage('me');
+    } catch (e) { if (msg) { msg.style.display='block'; msg.textContent='修改失败'; } }
+}
+
+function cancelForceChange() {
+    // 用户选择退出则登出
+    currentUser = null; saveUser();
+    const m = document.getElementById('forceChangeModal'); if (m) m.style.display='none';
+    renderMeContent();
+    showPage('me');
+}
+
+// 支付相关
+/**
+ * 打开支付模态框
+ */
+function openPayModal() {
+    if (!cart || cart.length === 0) { alert('购物车为空'); return; }
+    document.getElementById('payModal').style.display = 'flex';
+    document.getElementById('payQRWrap').style.display = 'none';
+}
+
+/**
+ * 关闭支付模态框
+ */
+function closePayModal() {
+    document.getElementById('payModal').style.display = 'none';
+}
+
+/**
+ * 显示支付二维码
+ * @param {string} type - 支付类型 ('wechat' 或 'alipay')
+ */
+function showPayQR(type) {
+    var qr = type === 'wechat'
+      ? 'https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=weixin://wxpay/mockpay'
+      : 'https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=alipay://alipay/mockpay';
+    document.getElementById('payQRImg').src = qr;
+    document.getElementById('payQRWrap').style.display = 'flex';
+}
+
+/**
+ * 处理支付成功逻辑
+ */
+function paySuccess() {
+    closePayModal();
+    clearCart();
+    alert('支付成功！感谢您的购买。');
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</head>
+
+<body>
+
+<header>
+    <h1>皮影戏文化平台</h1>
+</header>
+
+<!-- ===== 皮影剧场 ===== -->
+<section id="theater" class="page active">
+    <h2>皮影剧场</h2>
+    <p>观看经典皮影戏表演，感受非遗魅力。</p>
+    <div class="video-box">
+        <div class="theater-clock" id="theaterClock">--:--:--</div>
+        <iframe src="https://www.bilibili.com/blackboard/html5mobileplayer.html?aid=BV1Q5411W7Zr"
+                frameborder="0" allowfullscreen></iframe>
+    </div>
+</section>
+
+<!-- ===== 文创商场 ===== -->
+<section id="shop" class="page">
+    <h2>文创商场</h2>
+    <div class="products" id="products"></div>
+
+    <div class="cart">
+        <h3>购物车</h3>
+        <div id="cartList">购物车为空</div>
+        <p>购物车总价：¥<span id="total">0.00</span></p>
+        <button onclick="clearCart()" style="margin-top:8px;">清空购物车</button>
+        <button onclick="openPayModal()" style="margin-top:8px;margin-left:12px;background:linear-gradient(90deg,#1aad19,#1677ff);color:#fff;">去支付</button>
+    </div>
+</section>
+
+<!-- ===== 论坛 ===== -->
+<section id="forum" class="page">
+    <h2>交流论坛</h2>
+    <div class="forum-input">
+        <input id="postName" placeholder="您的昵称（可选）">
+        <textarea id="postText" rows="4" placeholder="分享你的想法或问题..."></textarea>
+        <div class="forum-buttons">
+            <button onclick="postMessage()">发表评论</button>
+            <button onclick="clearPosts()">清空帖子</button>
+        </div>
+    </div>
+    <div id="posts"></div>
+</section>
+
+<!-- ===== 我的 ===== -->
+<section id="me" class="page">
+    <h2>我的</h2>
+    <div id="meContent">
+        <!-- 登录状态或登录表单将由 JS 渲染 -->
+    </div>
+    <div class="history-list" id="historyList">
+        <h3 style="margin-top:0;">浏览记录</h3>
+        <!-- 浏览记录项 -->
+    </div>
+</section>
+
+<!-- ===== 底部导航 ===== -->
+<nav>
+    <button class="active" data-target="theater" onclick="showPage('theater', this)">🎭<br>剧场</button>
+    <button data-target="shop" onclick="showPage('shop', this)">🛍️<br>商场</button>
+    <button data-target="forum" onclick="showPage('forum', this)">💬<br>论坛</button>
+    <button data-target="me" onclick="showPage('me', this)">👤<br>我的</button>
+</nav>
+
+<!-- ===== 支付弹窗 ===== -->
+<div id="payModal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.35);align-items:center;justify-content:center;">
+      <div style="background:#fff;padding:32px 24px 24px 24px;border-radius:16px;min-width:320px;max-width:90vw;box-shadow:0 8px 32px rgba(0,0,0,0.18);text-align:center;position:relative;">
+        <div style="position:absolute;right:16px;top:12px;cursor:pointer;font-size:20px;color:#888;" onclick="closePayModal()">×</div>
+        <h3 style="color:#7b1e1e;margin-bottom:18px;">选择支付方式</h3>
+        <div style="display:flex;gap:18px;justify-content:center;margin-bottom:18px;">
+          <button onclick="showPayQR('wechat')" style="flex:1;padding:12px 0;background:#1aad19;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;">微信支付</button>
+          <button onclick="showPayQR('alipay')" style="flex:1;padding:12px 0;background:#1677ff;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;">支付宝支付</button>
+        </div>
+        <div id="payQRWrap" style="display:none;flex-direction:column;align-items:center;">
+          <img id="payQRImg" src="" alt="二维码" style="width:160px;height:160px;margin-bottom:12px;border-radius:8px;box-shadow:0 2px 8px #eee;">
+          <div style="font-size:15px;color:#555;margin-bottom:10px;">请使用对应APP扫码支付</div>
+          <button onclick="paySuccess()" style="background:linear-gradient(90deg,#7b1e1e,#a93226);color:#fff;padding:10px 32px;border:none;border-radius:8px;font-size:15px;font-weight:600;">模拟支付成功</button>
+        </div>
+            </div>
+        </div>
+
+<!-- ===== 强制修改密码弹窗 ===== -->
+<div id="forceChangeModal" style="display:none;position:fixed;z-index:10000;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.4);align-items:center;justify-content:center;">
+    <div style="background:#fff;padding:20px;border-radius:12px;min-width:300px;max-width:90vw;box-shadow:0 10px 30px rgba(0,0,0,0.15);">
+        <div style="font-size:18px;color:#7b1e1e;margin-bottom:8px;font-weight:700;">首次登录请修改密码</div>
+        <div style="font-size:13px;color:#444;margin-bottom:12px;">初始密码为 123456，出于安全请设置新密码（不能为 123456）。</div>
+        <input id="newPwd1" class="auth-input" type="password" placeholder="请输入新密码（至少4位）">
+        <input id="newPwd2" class="auth-input" type="password" placeholder="请再次输入新密码以确认">
+        <div id="forceMsg" style="color:#c62828;font-size:13px;margin:8px 0;display:none;"></div>
+        <div style="display:flex;gap:8px;margin-top:6px;">
+            <button onclick="submitForceChange()" class="primary-btn" style="flex:1;background:linear-gradient(90deg,#e53935,#b71c1c);">提交</button>
+            <button onclick="cancelForceChange()" class="primary-btn" style="flex:1;background:#f3f4f6;color:#333;border:1px solid #e6e6e6;">退出登录</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

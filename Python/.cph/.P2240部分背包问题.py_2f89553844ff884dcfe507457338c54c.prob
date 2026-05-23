@@ -1,0 +1,1 @@
+{"name":"Local: P2240部分背包问题","url":"d:\\Files\\codingFiles\\VScodeFiles\\Python\\Test\\P2240部分背包问题.py","tests":[{"id":1774360996115,"input":"4 50\n10 60\n20 100\n30 120\n15 45","output":"240.00"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Files\\codingFiles\\VScodeFiles\\Python\\Test\\P2240部分背包问题.py","group":"local","local":true}

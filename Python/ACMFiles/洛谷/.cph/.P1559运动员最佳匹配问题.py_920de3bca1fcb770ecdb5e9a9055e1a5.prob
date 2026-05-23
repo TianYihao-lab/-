@@ -1,0 +1,1 @@
+{"name":"Local: P1559运动员最佳匹配问题","url":"d:\\Files\\codingFiles\\VScodeFiles\\Python\\洛谷\\P1559运动员最佳匹配问题.py","tests":[{"id":1775051613436,"input":"3\n10 2 3\n2 3 4\n3 4 5\n2 2 2\n3 5 3\n4 5 1","output":"52"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Files\\codingFiles\\VScodeFiles\\Python\\洛谷\\P1559运动员最佳匹配问题.py","group":"local","local":true}

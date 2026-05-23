@@ -1,0 +1,32 @@
+show databases ;
+
+select database();
+
+show tables ;
+
+use test;
+desc user;
+
+insert into  user(name,id,age) values ('tyh',0423,20);
+
+select * from user;
+insert into user values ('mn',0432,20);
+
+insert into user values('小华',888,18),('小美',999,18);
+
+SELECT DISTINCT name, id, age
+FROM user
+ORDER BY id ASC;
+
+update user set name='小智'where id=999;
+
+alter table user add gender char(1) comment '性别';
+
+update user set gender='男'where name!='mn';
+update user set gender='女'where name='mn';
+
+delete from user where gender='女';
+delete from user;
+
+ALTER TABLE user
+DROP COLUMN gender;
