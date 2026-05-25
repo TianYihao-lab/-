@@ -23,13 +23,10 @@ def Cal(x,y,m,n):
   return _counts[x][y]-_counts[x][n-1]-_counts[m-1][y]+_counts[m-1][n-1]
 
 ans,x0,y0=0,0,0
-# for i in range(1,n+1-c):
-#   for j in range(1,m+1-c):
-
-for i in range(1,n+2-c):
-  for j in range(1,m+2-c):
+for i in range(1,n+1-c):
+  for j in range(1,m+1-c):
     tmp=Cal(i+c-1,j+c-1,i,j)
     if ans<tmp:
       ans=tmp
       x0,y0=i,j
-print(x0,y0)
+print(i,j)
