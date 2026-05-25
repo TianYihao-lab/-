@@ -1,32 +1,18 @@
-def test01():       # 暴力
+def test():
     n,x=map(int,input().split())
-    _list=[0]+list(map(int,input().split()))
-
-    _Sum=[0]*(n+1)
+    _list=list(map(int,input().split()))    
+    _dict={}
+    tmp=0
+    _counts=[0]*(n+1)
     for i in range(1,n+1):
-        _Sum[i]=_Sum[i-1]^_list[i]
+        _counts[i]=_counts[i-1]^_list[i-1]
+
+        _dict[_counts[i]]=_dict.get(_counts[i],0)+1
 
     ans=0
-    for i in range(1,n+1):
-        for j in range(i+1,n+1):
-            if _Sum[i]^_Sum[j]==x:
-                ans+=1
-    print(ans)
+    for i in _counts:
+        if i^x in _dict:
+            ans+=_dict[i^x]
+    print(ans//2)
 
-def test02():
-        n,x=map(int,input().split())
-        _list=[0]+list(map(int,input().split()))
-
-        _Sum=[0]*(n+1)
-        for i in range(1,n+1):
-            _Sum[i]=_Sum[i-1]^_list[i]
-        # print(*_Sum)
-
-        ans=0
-        for i in range(1,n+1):
-            if _Sum[i]^x in _Sum[:i]:
-                # print(_Sum[i],_Sum[i]^x)
-                ans+=_Sum.count(_Sum[i]^x)
-        print(ans)
-        
-test02()
+test()
