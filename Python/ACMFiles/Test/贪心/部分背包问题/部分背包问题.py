@@ -9,10 +9,10 @@ _list.sort(key=lambda i:i[2],reverse=True)
 
 _total=0
 for i in _list:
-    if i[0]<c:
+    if i[0]<c:  #　背包能够装下整堆金币
         _total+=i[1]
         c-=i[0]
-    else:
+    else:       # 背包只能够装下部分金币
         _total+=(i[2]*c)
         break
 print(f"{_total:.2f}")
